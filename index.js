@@ -3,8 +3,6 @@ const bodyParser = require('body-parser');
 const logger = require('./middleware/logger');
 const errorHandler = require('./middleware/errorHandler');
 const userRoutes = require('./routes/users');
-const postRoutes = require('./routes/posts');
-const commentRoutes = require('./routes/comments');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -16,9 +14,7 @@ app.use(express.static('public'));
 app.set('view engine', 'ejs');
 
 // Routes
-app.use('/api/users', userRoutes);
-app.use('/api/posts', postRoutes);
-app.use('/api/comments', commentRoutes);
+app.use('/api/users', userRoutes); // Integrate user routes
 
 // Render view
 app.get('/', (req, res) => {

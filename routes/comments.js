@@ -14,6 +14,13 @@ router.get('/:postId', (req, res) => {
 
 // POST a new comment
 router.post('/', (req, res) => {
+    console.log('Received request body:', req.body); // Log the request body
+
+    // Validate incoming data
+    if (!req.body.postId || !req.body.content) {
+        return res.status(400).json({ message: 'postId and content are required.' });
+    }
+
     const newComment = { id: comments.length + 1, postId: req.body.postId, content: req.body.content };
     comments.push(newComment);
     res.status(201).json(newComment);

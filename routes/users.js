@@ -1,15 +1,19 @@
 const express = require('express');
 const router = express.Router();
-const User = require('../models/user');
 
-// Add user route
+let users = []; // In-memory array to store users
+
+// POST route to add a user
 router.post('/add', (req, res) => {
-  const user = new User(req.body);
-  user.save()
-    .then(() => res.redirect('/'))
-    .catch(err => res.status(400).send(err));
+    const name = req.body.name; // Get the name from the request body
+    if (!name) {
+        return res.status(400).send('Name is required'); // Respond with an error if name is not provided
+    }
+    
+    // Create a new user object
+    const newUser = { id: users.length + 1, name };
+    users.push(newUser); // Add the new user to the array
+    res.status(201).json(newUser); // Respond with the newly created user
 });
 
-// Other user routes...
-
-module.exports = router;
+module.exports = router; // Export the router for use in other files
