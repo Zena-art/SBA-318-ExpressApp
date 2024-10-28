@@ -1,0 +1,13 @@
+<%- include('../layouts/layout.ejs') %>
+<h2>Comments</h2>
+<a href="/comments/new" class="btn btn-primary mb-3">Add Comment</a>
+<div class="list-group">
+  <% comments.forEach(comment => { %>
+    <div class="list-group-item">
+      <p><strong><%= comment.author.username %>:</strong> <%= comment.content %></p>
+      <form action="/comments/<%= comment._id %>?_method=DELETE" method="POST" class="d-inline">
+        <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+      </form>
+    </div>
+  <% }) %>
+</div>

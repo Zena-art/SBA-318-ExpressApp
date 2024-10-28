@@ -1,0 +1,18 @@
+<%- include('../layouts/layout.ejs') %>
+<h1 class="mb-4">Posts</h1>
+<a href="/posts/new" class="btn btn-primary mb-3">Create New Post</a>
+<div class="list-group">
+  <% posts.forEach(post => { %>
+    <div class="list-group-item">
+      <h5><a href="/posts/<%= post._id %>"><%= post.title %></a></h5>
+      <p>By <strong><%= post.author.username %></strong></p>
+      <p><%= post.content.substring(0, 100) %>...</p>
+      <div class="d-flex justify-content-between">
+        <a href="/posts/<%= post._id %>/edit" class="btn btn-secondary">Edit</a>
+        <form action="/posts/<%= post._id %>?_method=DELETE" method="POST" class="d-inline">
+          <button type="submit" class="btn btn-danger">Delete</button>
+        </form>
+      </div>
+    </div>
+  <% }) %>
+</div>
